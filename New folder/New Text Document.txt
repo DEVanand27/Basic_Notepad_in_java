@@ -1,0 +1,667 @@
+pls change the file directory.
+
+
+
+
+
+import java.awt.*;
+
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.undo.UndoManager;
+import java.lang.Object;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.*;
+import java.awt.event.*;
+import java.awt.font.TextAttribute;
+ 
+import java.awt.event.MouseEvent;  
+import java.awt.event.MouseMotionListener; 
+public class javaproject extends WindowAdapter  implements MouseMotionListener 
+{
+	JFrame frame,f;
+	String undo;
+	Color c;
+	 JTextArea text;
+	 JLabel l123;
+	 JPanel p;
+	 JButton colour;
+	 int counter=0;
+	 Font font;
+	 int fontsize=15;
+	 String font1;
+	 String textStatement;
+	 JLabel l1;
+	 JComboBox<String> fontBox ;
+	 String fontname;
+	 
+	javaproject()
+	{
+		Scanner d=new Scanner(System.in);
+		 frame=new JFrame("DEV FINAL PROJECT ");
+		 
+		MenuBar mb=new MenuBar();
+		Menu m1=new Menu("FILE");
+		MenuItem m11=new MenuItem("NEW");
+		MenuItem m12=new MenuItem("NEW WINDOW");
+		MenuItem m13=new MenuItem("OPEN");
+		MenuItem m14=new MenuItem("SAVE");
+		MenuItem m15=new MenuItem("SAVE AS");
+		MenuItem m16=new MenuItem("EXIT");
+		
+		m1.add(m11);
+		m1.add(m12);
+		m1.add(m13);
+		m1.add(m14);
+		m1.add(m15);
+		m1.add(m16);
+		mb.add(m1);
+		Menu m2=new Menu("EDIT");
+		MenuItem m21 =new MenuItem("UNDO");
+		MenuItem m22=new MenuItem("COPY");
+		MenuItem m23=new MenuItem("PASTE");
+		MenuItem m24=new MenuItem("DELETE");
+		MenuItem m25=new MenuItem("REDO");
+	    m2.add(m21);
+	    m2.add(m22);
+	    m2.add(m23);
+	    m2.add(m24);
+	    m2.add(m25);
+	    mb.add(m2);
+	    
+	    Menu m3=new Menu("DRAW");
+	    MenuItem m31=new MenuItem("DRAW");
+	    MenuItem m32=new MenuItem("COLOUR");
+	    MenuItem m33=new MenuItem("SHAPES");
+	    MenuItem m34=new MenuItem("ERASE");
+	    m3.add(m31);
+	    m3.add(m32);
+	    m3.add(m33);
+	    m3.add(m34);
+	    mb.add(m3);
+	    text=new JTextArea();
+		text.setBounds(0, 50, 1520, 762);
+		frame.add(text);
+		UndoManager UNDOREDO = new UndoManager(); 
+		text.getDocument().addUndoableEditListener(UNDOREDO);
+		
+		
+		
+		// JPanel p3=new JPanel();
+		 JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 50, 25);  
+		    slider.setMinorTickSpacing(2);  
+		    slider.setMajorTickSpacing(10);  
+		    slider.setPaintTicks(true);  
+		    slider.setPaintLabels(true); 
+		    
+		    slider.addChangeListener(new ChangeListener() {
+		        public void stateChanged(ChangeEvent event) {
+	           		fontname =fontBox.getSelectedItem().toString();
+	           		fontsize=(Integer) slider.getValue();
+	           		Font font = new Font(fontname, Font.PLAIN,fontsize );
+	                text.setFont(font);
+	               
+	               
+		        }
+		    });
+		    
+		    //p3.add(slider);
+		    
+	      //  frame.add(p3);
+		    frame.add(slider);
+	        slider.setBounds(500, 1, 10, 10);
+	        frame.setMaximumSize(null);
+	        frame.pack();
+		        	
+		//addMouseMotionListener((ActionListener) this);
+		
+		
+		   
+		
+		
+		
+		//JPanel slider =new JPanel();
+		/*JSlider slide = new JSlider(JSlider.HORIZONTAL, 0, 50, 25);
+		slide.setMinorTickSpacing(2);  
+	    slide.setMajorTickSpacing(10); 
+	    slide.setBounds(200,100, 200, 200);
+	    slide.addChangeListener(new ChangeListener() {
+	        public void stateChanged(ChangeEvent event) {
+	        	
+	        	        	
+	        	
+	        }
+	    });
+	    
+	   // slider.add(slide);
+	    frame.add(slide);
+	    frame.setMaximumSize(null);
+	    frame.pack();*/
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+		 
+		m11.addActionListener(new ActionListener()
+				{
+			public void actionPerformed(ActionEvent e)
+			{
+				try
+		    		{
+		    			text.setText(null);
+		    		}
+		    		
+				catch(Exception E)
+				{
+					System.out.print("error:"+E.getMessage());
+				}
+			}
+				});
+		
+		
+		
+		
+		
+		m12.addActionListener(new ActionListener()
+				{
+			public void actionPerformed(ActionEvent e)
+			{
+				try
+				{
+					/*JFrame f=new JFrame("tabbed frame");
+					f.setLayout(new GridLayout(1,1));
+					JTabbedPane tp=new JTabbedPane ();
+					f.add(tp);
+					JPanel dept=new JPanel();
+					tp.addTab("new",dept);
+					f.setSize(500,500);
+					f.setVisible(true);
+					f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);*/
+					  JPanel p1=new JPanel();  
+					    p1.add(text);  
+
+					    JTabbedPane tp=new JTabbedPane();  
+					    tp.setBounds(50,50,200,200);  
+				  
+					   frame.add(tp);  	    
+					   
+	   
+					    	    JPanel p2=new JPanel();  
+					    		String filename="new"+Integer.toString(counter);
+					    		tp.add(filename,p2);
+					    		counter++;
+				    		
+					    
+					
+					 
+					
+				}
+				catch(Exception E)
+				{
+					
+				}
+			}
+				});
+		
+		
+		
+		
+		
+		m13.addActionListener(new ActionListener()
+				{
+			public void actionPerformed(ActionEvent e)
+			{
+				/*String result;
+				JFrame frame1 =new JFrame();
+				frame1.setSize(300,200);
+				frame1.setLocationRelativeTo(null);  
+                frame1.setVisible(true);  
+                result = (String)JOptionPane.showInputDialog(
+                        frame,
+                        "Provide File Name", 
+                        "File Name",            
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,            
+                        null, 
+                        null
+                      ); */
+				FileDialog saveAs=new FileDialog((Frame)null,"open file");
+				saveAs.setMode(FileDialog.LOAD);
+		   		saveAs.setVisible(true);
+		        String result=saveAs.getFile();
+               try {
+					text.setText(null);
+					//"C:\\Users\\R.DEVANAND\\eclipse-workspace\\JAVAPROJECT\\"+result+".txt"
+					FileReader a=new FileReader("C:\\Users\\R.DEVANAND\\OneDrive\\Desktop\\NOTEPAD\\"+result);
+					Scanner a1=new Scanner(a);
+					String lines[]=new String[32500];
+					for(int i=0;a1.hasNext();i++)
+					{
+						lines[i]=a1.nextLine();
+						System.out.println(lines[i]);
+						text.append(lines[i]+"\n");
+						
+					}
+					}
+				catch(Exception E)
+				{
+					System.out.print("error:"+E.getMessage());	
+				}
+			}
+				});
+		
+		
+		
+		
+		
+		 m14.addActionListener(new ActionListener()
+    		{
+    	public void actionPerformed(ActionEvent E)
+    	{
+    		try
+    		{
+    		String str = text.getText();
+    		FileWriter Files =new FileWriter("default.txt");
+    		Files.write(str);
+    		Files.close();
+    		}
+    		catch(Exception e)
+    		{
+    			System.out.println("error:"+e.getMessage());
+    		}
+    	}
+    		});
+		 
+		 
+		 
+		 
+		 
+		 m15.addActionListener(new ActionListener()
+   		 {
+   	 public void actionPerformed(ActionEvent e)
+   	 { 
+   		/*String result;
+   		JFrame frame = new JFrame("Save As");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(560, 200);      
+        frame.setLocationRelativeTo(null);  
+        frame.setVisible(true); */
+   		FileDialog saveAs=new FileDialog((Frame)null,"Save The File As:");
+   		saveAs.setMode(FileDialog.SAVE);
+   		saveAs.setVisible(true);
+        String result=saveAs.getFile();
+        // result = (String)JOptionPane.showInputDialog(frame,"Provide File Name", "File Name",JOptionPane.PLAIN_MESSAGE,null,null,null);
+        try
+   		{
+   		String str = text.getText();
+   		System.out.println(str);
+   		//"C:\\Users\\R.DEVANAND\\OneDrive\\Desktop\\NOTEPAD\\"+result+".txt"
+   		//result+".txt"
+   		FileWriter Files =new FileWriter("C:\\Users\\R.DEVANAND\\OneDrive\\Desktop\\NOTEPAD\\"+result+".txt");
+   		Files.write(str);
+   		Files.close();
+   		}
+        catch(Exception E)
+        {
+        	System.out.println("error:"+E.getMessage());
+        }
+      }
+   		 });
+		 
+		 
+		 
+		 
+		 
+		 m16.addActionListener(new ActionListener()
+				 {
+			 public void actionPerformed(ActionEvent e)
+			 {
+				 System.exit(1);
+			 }
+				 });
+		 
+		 
+		 
+		 
+		 
+		 m21.addActionListener(new ActionListener()
+		 {
+	 public void actionPerformed(ActionEvent e)
+	 {
+		 
+		 //text.setText(undo);
+		 UNDOREDO.undo();
+	 }
+		 });
+		 
+		 
+		 
+		 
+		 m22.addActionListener(new ActionListener()
+				 {
+			 public void actionPerformed(ActionEvent e)
+			 {
+				 String copy=text.getSelectedText();
+				 textStatement=copy;
+				 
+			 }
+				 });
+		 
+		 
+		 
+		 
+		 
+		 m23.addActionListener(new ActionListener()
+		 {
+	 public void actionPerformed(ActionEvent e)
+	 {
+		 text.append(textStatement);
+		 
+	 }
+		 });
+		 
+		 
+		 
+		 
+		 
+		 m24.addActionListener(new ActionListener()
+				 {
+			 public void actionPerformed(ActionEvent e)
+			 {
+				 text.replaceSelection("");
+				 
+			 }
+				 });
+		 
+		 m25.addActionListener(new ActionListener()
+		 {
+	 public void actionPerformed(ActionEvent e)
+	 {
+		 
+		 //text.setText(undo);
+		 UNDOREDO.redo();
+	 }
+		 });
+		 ImageIcon icon =new ImageIcon("C:\\Users\\R.DEVANAND\\eclipse-workspace\\JAVAPROJECT\\download.jpg");
+		 colour =new JButton(icon);
+		 colour.setBounds(500, 1,40, 30);
+		 JLabel colour1=new JLabel("FONT COLOUR");
+		 colour1.setBounds(480,0 , 120, 80);
+		 frame.add(colour1);
+		 frame.add(colour);
+		 colour.addActionListener(new ActionListener()
+				 {
+			 public void actionPerformed(ActionEvent e)
+			 {
+				 Color c=JColorChooser.showDialog(null,"choose", null);
+				 text.setForeground(c);
+				 
+			 }
+		  }
+				 );
+		 GraphicsEnvironment graphEnviron =GraphicsEnvironment.getLocalGraphicsEnvironment();
+	     String []fonts=GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+         fontBox = new JComboBox<>(fonts);       
+         fontBox.setBounds(600, 1,90,20);   
+  	     fontBox.addItemListener(new ItemListener() 
+  	     {    
+	        public void itemStateChanged(ItemEvent e) 
+	        { 
+	           	if (e.getStateChange()==1)
+	           	{     
+	           		fontname=fontBox.getSelectedItem().toString();
+	           		
+	           		 font = new Font(fontname,Font.PLAIN, fontsize);
+	                text.setFont(font);	           		
+
+	           	}
+	    }
+	    });
+  	     
+  	    frame.add(fontBox);
+		 
+		 
+		 
+		 ImageIcon bold =new ImageIcon("C:\\Users\\R.DEVANAND\\eclipse-workspace\\JAVAPROJECT\\bold.jpg");
+		 colour =new JButton(bold);
+		 colour.setBounds(250, 1,15,16);
+		 frame.add(colour);
+		 colour.addActionListener(new ActionListener()
+				 {
+			 public void actionPerformed(ActionEvent e)
+			 {
+				  font1=text.getFont().toString();
+				 Font fontbold=new Font(font1,Font.BOLD,fontsize);
+				 
+				 text.setFont(fontbold);
+				 
+				 
+			 }
+				 });
+	 
+		 ImageIcon italics =new ImageIcon("C:\\Users\\R.DEVANAND\\eclipse-workspace\\JAVAPROJECT\\italics.jpg");
+		 colour =new JButton(italics);
+		 colour.setBounds(265, 1,15,16);
+		 frame.add(colour);
+		 colour.addActionListener(new ActionListener()
+		 {
+	 public void actionPerformed(ActionEvent e)
+	 {
+		 
+		 
+		 
+		 font1=text.getFont().toString();
+		 Font fontitalics=new Font(font1,Font.ITALIC,fontsize);
+		 text.setFont(fontitalics);
+		 
+		 
+	 }
+		 });
+		 ImageIcon underline =new ImageIcon("C:\\Users\\R.DEVANAND\\eclipse-workspace\\JAVAPROJECT\\underline.jpg");
+		 colour =new JButton(underline);
+		 colour.setBounds(280, 1,15,16);
+		 frame.add(colour);
+		 colour.addActionListener(new ActionListener()
+		 {
+	 public void actionPerformed(ActionEvent e)
+	 {
+		 
+		// font1=text.getFont().toString();
+		 //font1=text.getSelectedText();
+		 
+		 
+		 /*Map<TextAttribute, Integer> fontAttributes = new HashMap<TextAttribute, Integer>();
+		 fontAttributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+		 Font boldUnderline = new Font(font1,Font.PLAIN, fontsize).deriveFont(fontAttributes);
+		 text.setFont(boldUnderline);*/
+		 
+		 
+		 Font font = text.getFont();
+		 Map underline = font.getAttributes();
+		 underline.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+		 text.setFont(font.deriveFont(underline));
+		
+		 
+		 
+	 }
+		 });
+		 
+		 SpinnerModel value=new SpinnerNumberModel(20,0,50,2);
+		 JSpinner spinner=new JSpinner(value);
+		 spinner.setBounds(300, 1, 50, 30);
+		 frame.add(spinner);
+		 value.addChangeListener(new ChangeListener()
+		 {  
+             public void stateChanged(ChangeEvent e)
+             {
+	           		//fonttype=fontBox.getSelectedItem().toString();
+	           		fontsize=(Integer) spinner.getValue();
+	           		Font font = new Font(font1, Font.PLAIN, fontsize);
+	                text.setFont(font);		                
+           
+             }  
+          });  
+		 
+		 
+		 ImageIcon paint =new ImageIcon("C:\\Users\\R.DEVANAND\\eclipse-workspace\\JAVAPROJECT\\paint.jpg");
+		 colour =new JButton(paint);
+		 colour.setBounds(900, 0, 50, 50);
+		 frame.add(colour);
+		 
+		 colour.addActionListener(new ActionListener()
+				 {
+			 public void actionPerformed(ActionEvent e)
+			 {
+				 
+				f=new JFrame("PAINT");
+				JPanel pane=new JPanel();
+				l123=new JLabel();
+				l123.setBounds(100, 100, 100, 20);
+				f.add(l123);
+				
+				
+				ImageIcon icon =new ImageIcon("C:\\Users\\R.DEVANAND\\eclipse-workspace\\JAVAPROJECT\\download.jpg");
+				colour =new JButton(icon);
+				colour.setBounds(500, 1,40, 30);
+			    JLabel colour1=new JLabel("COLOUR");
+				colour1.setBounds(480,0 , 120, 80);
+				f.add(colour1);
+				f.add(colour);
+				colour.addActionListener(new ActionListener()
+				{
+					
+					 public void actionPerformed(ActionEvent e)
+					 {
+						  c=JColorChooser.showDialog(null,"choose", null);
+					 }
+					 
+					 
+						
+
+				  }
+				);
+				MenuBar mee;
+				 Menu f31;
+				 Menu f32;
+				 Menu f33;
+				 Menu f34;
+				
+				
+				
+				 mee=new MenuBar();
+				 f31=new Menu("DRAW");
+				 f32=new Menu("COLOUR");
+				 f33=new Menu("SHAPES");
+				 f34=new Menu("ERASE");
+				 mee.add(f31);
+				 mee.add(f32);
+				 mee.add(f33);
+				 mee.add(f34);
+				 f.setMenuBar(mee);
+				 
+				 
+				 Label l1=new Label();
+				 l1.setBounds(20, 40, 100, 20);
+				 f.add(l1);
+				 
+				 
+			     f.setLayout(null);
+				 f.setSize(3000,1000);
+				 f.setVisible(true);
+				 
+			 }
+			 });
+		    
+		  frame.addMouseMotionListener(this);
+		 
+		 
+		 JLabel l=new JLabel("DRAW>>");
+		 l.setBounds(850, 10, 50, 50);
+		 frame.add(l);
+		 
+		 
+		 
+		
+		
+		
+		
+		 JScrollPane scrollableTextArea = new JScrollPane(text);  
+		 scrollableTextArea.setBounds(10,50,1520, 700);
+		 scrollableTextArea.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);  
+	     scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
+		 frame.getContentPane().add(scrollableTextArea);
+		 
+		 frame.addWindowListener(this); 
+		 frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		 
+		
+		
+	    frame.setMenuBar(mb);
+	    frame.setLayout(null);
+		frame.setSize(3000,1000);
+		frame.setVisible(true);
+		
+	}
+	/*public void mouseDragged(MouseEvent e) {
+	//	l.setText("x="+e.getX()+"y="+e.getY());
+		/*Graphics g=getGraphics();
+		g.setColor(Color.blue);*/
+		
+	/*}
+	public void mouseMoved(MouseEvent e)
+	{
+		//l.setText("x="+e.getX()+"y="+e.getY());
+		Graphics g=getGraphics();
+		g.setColor(Color.blue);
+		g.fillOval(e.getX(),e.getY(), 10, 10);
+	}
+	 Graphics getGraphics() {
+		// TODO Auto-generated method stub
+		
+		return null;
+	}*/
+	public void windowClosing(WindowEvent e)
+	{  
+		int closingConfirmation=JOptionPane.showConfirmDialog(frame,"SURE?");  
+		if(closingConfirmation==JOptionPane.YES_OPTION)
+		{  
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+		}  
+	}
+	
+	
+
+
+
+	
+	
+	
+	public static void main(String args[])
+	{
+		
+		new javaproject();
+		
+	}
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+
+}
+
